@@ -1,3 +1,5 @@
+import Module from "@/pages/Module.vue";
+
 /**
  * router/index.ts
  *
@@ -15,14 +17,27 @@ const routes = [
     },
     redirect: "/main",
     component: () => import("@/layouts/FullLayout.vue"),
-    children: [{
-      path: "/",
-      name: "Home",
-      // route level code-splitting
-      // this generates a separate chunk (Home-[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import("@/pages/dashboard/Index.vue")
-    }]
+    children: [
+      {
+        path: "/",
+        name: "Home",
+        // route level code-splitting
+        // this generates a separate chunk (Home-[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import("@/pages/dashboard/Index.vue")
+      },
+      {
+        path: "/calendar",
+        component: Module,
+        children: [
+          {
+            path: "",
+            name: "calendar",
+            component: () => import("@/pages/calendar/Index.vue")
+          }
+        ]
+      },
+    ]
   },
   {
     path: "/auth",
